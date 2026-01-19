@@ -1,15 +1,19 @@
-graph TD
-    A[Cell Access & Security Check] --> B{"3G WCDMA 환경인가?"}
-    B -- Yes --> C["1. 3G Cell Barring 가능 여부 체크"]
-    B -- No --> D[LTE/5G Cell Barring 수행]
-    
-    C --> E{Barring 리스트 용량 확인}
-    E --> F["2. 최대 Cell Block 개수 한계 확인"]
-    
-    F --> G[3. 단말 상태 확인: LCD Off]
-    G --> H{보안 위협/Barring 발생}
-    H --> I["3. LCD Off 상태에서 Noti 동작 여부"]
-    
-    style C fill:#f9f,stroke:#333,stroke-width:2px
-    style F fill:#bbf,stroke:#333,stroke-width:2px
-    style I fill:#dfd,stroke:#333,stroke-width:2px
+graph LR
+    Root((FBS PoC<br/>체크리스트)) --- Q1["1. 3G Cell Barring 가능?"]
+    Root --- Q2["2. Cell Block 최대 개수?"]
+    Root --- Q3["3. LCD Off 시 Noti 동작?"]
+
+    Q1 --- A1["A사: OK (모뎀 레이어 지원)"]
+    Q1 --- B1["B사: OK (구형 모델 제외)"]
+
+    Q2 --- A2["A사: 32개 (FIFO 적용)"]
+    Q2 --- B2["B사: 16개 (추가 차단 불가)"]
+
+    Q3 --- A3["A사: OK (즉시 알림)"]
+    Q3 --- B3["B사: NOT OK (화면 켠 후 노출)"]
+
+    %% 스타일 설정
+    style Root fill:#f96,stroke:#333,stroke-width:2px
+    style Q1 fill:#fff4dd,stroke:#d4a017
+    style Q2 fill:#fff4dd,stroke:#d4a017
+    style Q3 fill:#fff4dd,stroke:#d4a017
