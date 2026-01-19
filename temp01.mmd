@@ -1,0 +1,15 @@
+graph TD
+    A[Cell Access & Security Check] --> B{3G (WCDMA) 환경인가?}
+    B -- Yes --> C[1. 3G Cell Barring 가능 여부 체크]
+    B -- No --> D[LTE/5G Cell Barring 수행]
+    
+    C --> E{Barring 리스트 용량 확인}
+    E --> F[2. 최대 Cell Block 개수 한계 확인]
+    
+    F --> G[3. 단말 상태 확인: LCD Off]
+    G --> H{보안 위협/Barring 발생}
+    H --> I[LCD Off 상태에서 사용자 Noti 동작 여부]
+    
+    style C fill:#f9f,stroke:#333,stroke-width:2px
+    style F fill:#bbf,stroke:#333,stroke-width:2px
+    style I fill:#dfd,stroke:#333,stroke-width:2px
